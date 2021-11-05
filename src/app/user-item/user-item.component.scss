@@ -1,6 +1,16 @@
 :host {
   display: flex;
   align-items: center;
+  cursor: pointer;
+  padding: 10px;
+  transition: all 0.2s;
+  border-radius: 50px;
+}
+:host:hover {
+  background-color: gray;
+  span {
+    color: white;
+  }
 }
 
 img {
@@ -10,4 +20,5 @@ img {
 
 span {
   margin-left: 20px;
+  transition: all 0.2s;
 }
