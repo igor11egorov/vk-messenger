@@ -1,0 +1,24 @@
+:host {
+  background-color: lightgrey;
+  width: 500px;
+  height: 500px;
+  align-items: center;
+  cursor: pointer;
+  padding: 4px;
+  margin-left: 5px;
+  transition: all 0.2s;
+  border-radius: 5px;
+}
+
+input {
+  margin-block-start: 455px;
+  width: 410px;
+}
+
+button{
+  margin-block-start: 455px;
+}
+
+.flex{
+  display: inline-flex;
+}
