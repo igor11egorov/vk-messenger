@@ -1,5 +1,9 @@
 <div class="message-list">
-  <p>{{ message }}</p>
+  <app-conversation-item
+    *ngFor="let item of conversationItems"
+    [data]="item"
+    [ngClass]="{ mine: item.mine}"
+  ></app-conversation-item>
 </div>
 <div class="input-footer">
   <textarea
