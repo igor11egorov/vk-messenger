@@ -1,24 +1,20 @@
 :host {
   background-color: lightgrey;
-  width: 500px;
-  height: 500px;
-  align-items: center;
   cursor: pointer;
-  padding: 4px;
-  margin-left: 5px;
   transition: all 0.2s;
-  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
-input {
-  margin-block-start: 455px;
-  width: 410px;
-}
-
-button{
-  margin-block-start: 455px;
-}
-
-.flex{
+.input-footer {
   display: inline-flex;
+  textarea {
+    width: 100%;
+    font-size: 20px;
+    resize: none;
+  }
+}
+
+.message-list {
+  flex: 1;
 }

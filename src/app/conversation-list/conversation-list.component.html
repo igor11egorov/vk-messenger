@@ -1,6 +1,12 @@
-<p>{{ message }}</p> 
-<div class="flex">
-    <input type="text" placeholder="введите сообщение" [(ngModel)]="message" (keyup.enter)="onEnter()">
-    <button (click)="onEnter()">Отправить</button>
+<div class="message-list">
+  <p>{{ message }}</p>
 </div>
-
+<div class="input-footer">
+  <textarea
+    placeholder="введите сообщение"
+    [(ngModel)]="message"
+    (keyup.enter)="onEnter()"
+  >
+  </textarea>
+  <button (click)="onEnter()">Отправить</button>
+</div>

@@ -1,10 +1,17 @@
 nav {
-  padding: 10px 30px;
   background: #5677be;
   color: #fff;
-  margin-bottom: 10px;
+  height: var(--nav-height);
+  font-size: 22px;
+  display: flex;
+  align-items: center;
+  padding-left: 5px;
 }
 
 .flex-container {
   display: flex;
+  app-conversation-list {
+    flex: 1;
+    height: calc(100vh - var(--nav-height));
+  }
 }
