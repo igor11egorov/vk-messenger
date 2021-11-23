@@ -62,7 +62,17 @@ export class ConversationListComponent implements OnInit {
     },
   ];
 
-  onEnter() {}
+  sendMessage() {
+    this.conversationItems.push({
+      date: new Date().toLocaleTimeString(undefined, {
+        hour: '2-digit',
+        minute: '2-digit',
+      }),
+      body: this.message,
+      mine: true,
+    });
+    this.message = '';
+  }
 
   ngOnInit(): void {}
 }

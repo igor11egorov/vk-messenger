@@ -17,6 +17,9 @@
 
 .message-list {
   flex: 1;
+  .mine:first-child {
+    margin-top: 10px;
+  }
 }
 
 app-conversation-item {
@@ -25,6 +28,37 @@ app-conversation-item {
 }
 
 .mine {
-  display: flex;
   justify-content: flex-end;
 }
+
+:not(.mine) + .mine,
+.mine + :not(.mine) {
+  margin-top: 10px;
+}
+
+// :host ::ng-deep {
+//   :not(.mine) + :not(.mine) > div {
+//     border-top-left-radius: 0;
+//     border-top-right-radius: 0;
+//   }
+//   :not(.mine):first-child > div {
+//     border-bottom-left-radius: 0;
+//     border-bottom-right-radius: 0;
+//   }
+//   .mine + .mine > div {
+//     border-top-left-radius: 0;
+//     border-top-right-radius: 0;
+//   }
+//   .mine + :not(.mine) > div {
+//     border-bottom-left-radius: 0;
+//     border-bottom-right-radius: 0;
+//   }
+//   :not(.mine) + .mine > div {
+//     border-bottom-left-radius: 0;
+//     border-bottom-right-radius: 0;
+//   }
+//   :not(.mine):last-child > div {
+//     border-bottom-left-radius: 40px;
+//     border-bottom-right-radius: 40px;
+//   }
+// }
