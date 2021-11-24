@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 import { UserMessage } from '../models/user-message';
 
 @Component({
@@ -63,16 +64,42 @@ export class ConversationListComponent implements OnInit {
   ];
 
   sendMessage() {
-    this.conversationItems.push({
+    let element = document.getElementById("my-scroll");
+    
+    console.log('scrollTop', element!.scrollTop)
+    console.log('scrollHeight', element!.scrollHeight)
+
+    //element!.scrollTop = element!.scrollHeight;
+    setInterval(()=> {element!.scrollTop = element!.scrollHeight}, 100)
+    //element!.scrollIntoView({block: "end"});
+    
+    let itemMessage = {
       date: new Date().toLocaleTimeString(undefined, {
         hour: '2-digit',
         minute: '2-digit',
       }),
       body: this.message,
       mine: true,
-    });
+    }
+
+    
+
+    this.conversationItems.push(itemMessage);
+    
+    let itemInLocalStorage = localStorage.setItem('myMessages', itemMessage.toString());
+    console.log(itemInLocalStorage);
+    console.log(itemMessage);
     this.message = '';
+    console.log(localStorage.getItem('myMessages'));
+
+    console.log('scrollTop', element!.scrollTop)
+    console.log('scrollHeight', element!.scrollHeight)
+    
   }
 
-  ngOnInit(): void {}
+
+  ngOnInit(): void {
+
+    localStorage.getItem('myMessages');
+  }
 }

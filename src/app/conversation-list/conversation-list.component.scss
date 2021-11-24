@@ -17,6 +17,8 @@
 
 .message-list {
   flex: 1;
+  overflow-y: scroll;
+  
   .mine:first-child {
     margin-top: 10px;
   }
