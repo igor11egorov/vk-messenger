@@ -1,8 +1,8 @@
-<div class="message-list" id="my-scroll">
-  <app-conversation-item 
+<div class="message-list" #myScroll>
+  <app-conversation-item
     *ngFor="let item of conversationItems"
     [data]="item"
-    [ngClass]="{ mine: item.mine}"
+    [ngClass]="{ mine: item.mine }"
   ></app-conversation-item>
 </div>
 <div class="input-footer">

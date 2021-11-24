@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { UserMessage } from '../models/user-message';
 
 @Component({
@@ -8,7 +7,7 @@ import { UserMessage } from '../models/user-message';
   styleUrls: ['./conversation-list.component.scss'],
 })
 export class ConversationListComponent implements OnInit {
-  constructor() {}
+  @ViewChild('myScroll') myScroll!: ElementRef;
   message = '';
   conversationItems: UserMessage[] = [
     {
@@ -63,16 +62,14 @@ export class ConversationListComponent implements OnInit {
     },
   ];
 
-  sendMessage() {
-    let element = document.getElementById("my-scroll");
-    
-    console.log('scrollTop', element!.scrollTop)
-    console.log('scrollHeight', element!.scrollHeight)
+  constructor() {}
 
-    //element!.scrollTop = element!.scrollHeight;
-    setInterval(()=> {element!.scrollTop = element!.scrollHeight}, 100)
-    //element!.scrollIntoView({block: "end"});
-    
+  sendMessage() {
+    setTimeout(() => {
+      const element = this.myScroll.nativeElement;
+      element!.scrollTop = element!.scrollHeight;
+    });
+
     let itemMessage = {
       date: new Date().toLocaleTimeString(undefined, {
         hour: '2-digit',
@@ -80,26 +77,18 @@ export class ConversationListComponent implements OnInit {
       }),
       body: this.message,
       mine: true,
-    }
+    };
 
-    
-
-    this.conversationItems.push(itemMessage);
-    
-    let itemInLocalStorage = localStorage.setItem('myMessages', itemMessage.toString());
-    console.log(itemInLocalStorage);
-    console.log(itemMessage);
     this.message = '';
-    console.log(localStorage.getItem('myMessages'));
+    this.conversationItems.push(itemMessage);
 
-    console.log('scrollTop', element!.scrollTop)
-    console.log('scrollHeight', element!.scrollHeight)
-    
+    localStorage.setItem('myMessages', JSON.stringify(this.conversationItems));
   }
 
-
   ngOnInit(): void {
-
-    localStorage.getItem('myMessages');
+    const itemsString = localStorage.getItem('myMessages');
+    if (itemsString) {
+      this.conversationItems = JSON.parse(itemsString);
+    }
   }
 }
