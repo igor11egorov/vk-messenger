@@ -1,2 +1,8 @@
-<app-user-item *ngFor="let user of users" [name]="user.name" [img]="user.img">
-</app-user-item>
+<!-- <a [routerLink]="['/id']">
+    <app-user-item *ngFor="let user of users" [name]="user.name" [img]="user.img">
+    </app-user-item>
+</a> -->
+
+
+    <app-user-item *ngFor="let user of users" [name]="user.name" [img]="user.img" [routerLink]="['/id'+user.id]">
+    </app-user-item>
