@@ -1,4 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { conversation } from './conversation-items';
 
 @Component({
@@ -8,9 +9,13 @@ import { conversation } from './conversation-items';
 })
 export class ConversationListComponent implements OnInit {
   @ViewChild('myScroll') myScroll!: ElementRef;
+  conversation = conversation;
   message = '';
+  id?: number;
 
-  constructor() {}
+  constructor(activateRoute: ActivatedRoute) {
+    activateRoute.params.subscribe((params) => (this.id = params['id']));
+  }
 
   sendMessage() {
     setTimeout(() => {

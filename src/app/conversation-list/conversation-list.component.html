@@ -1,6 +1,6 @@
 <div class="message-list" #myScroll>
   <app-conversation-item
-    *ngFor="let item of conversationItems"
+    *ngFor="let item of conversation.items"
     [data]="item"
     [ngClass]="{ mine: item.mine }"
   ></app-conversation-item>
