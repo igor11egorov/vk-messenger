@@ -1,4 +1,4 @@
-const { CallbackService } = require("vk-io");
+const { CallbackService, VK } = require("vk-io");
 const {
   DirectAuthorization,
   officialAppCredentials,
@@ -22,6 +22,15 @@ async function run() {
 
   console.log("Email:", response.email);
   console.log("User ID:", response.userId);
+
+  const vk = new VK({
+    token: response.token,
+  });
+
+  const users = await vk.api.users.get({
+    user_ids: 1,
+  });
+  console.log(users);
 }
 
 run().catch(console.error);
