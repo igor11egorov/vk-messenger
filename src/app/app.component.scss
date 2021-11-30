@@ -10,9 +10,11 @@ nav {
 
 .flex-container {
   display: flex;
-  app-conversation-list {
+}
+
+:host ::ng-deep {
+  .flex-container > app-conversation-list {
     flex: 1;
     height: calc(100vh - var(--nav-height));
   }
-  
 }
