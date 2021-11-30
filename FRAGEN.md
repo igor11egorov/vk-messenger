@@ -15,3 +15,6 @@ PASSWORD=...
 После запустить команду:
 
 `node server/index.js`
+
+Посмотреть документацию:
+<https://negezor.github.io/vk-io/ru/guide/modules.html#api>
