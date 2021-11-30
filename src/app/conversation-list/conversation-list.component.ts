@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { conversation } from './conversation-items';
+import { UserMessage } from '../models/user-message';
+import { defaultConversation } from './conversation-items';
 
 @Component({
   selector: 'app-conversation-list',
@@ -9,12 +10,20 @@ import { conversation } from './conversation-items';
 })
 export class ConversationListComponent implements OnInit {
   @ViewChild('myScroll') myScroll!: ElementRef;
-  conversation = conversation;
+  conversationItems: UserMessage[] = [];
   message = '';
   id?: number;
 
   constructor(activateRoute: ActivatedRoute) {
-    activateRoute.params.subscribe((params) => (this.id = params['id']));
+    activateRoute.params.subscribe((params) => {
+      this.id = params['id'];
+      const itemsString = localStorage.getItem('id' + this.id);
+      if (itemsString) {
+        this.conversationItems = JSON.parse(itemsString);
+      } else {
+        this.conversationItems = [...defaultConversation];
+      }
+    });
   }
 
   sendMessage() {
@@ -33,15 +42,13 @@ export class ConversationListComponent implements OnInit {
     };
 
     this.message = '';
-    conversation.items.push(itemMessage);
+    this.conversationItems.push(itemMessage);
 
-    localStorage.setItem('myMessages', JSON.stringify(conversation.items));
+    localStorage.setItem(
+      'id' + this.id,
+      JSON.stringify(this.conversationItems)
+    );
   }
 
-  ngOnInit(): void {
-    const itemsString = localStorage.getItem('myMessages');
-    if (itemsString) {
-      conversation.items = JSON.parse(itemsString);
-    }
-  }
+  ngOnInit(): void {}
 }

@@ -10,6 +10,10 @@ nav {
 
 .flex-container {
   display: flex;
+  app-user-list {
+    border-right: solid 1px #0000001c;
+    height: calc(100vh - var(--nav-height));
+  }
 }
 
 :host ::ng-deep {
