@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { UserMessage } from '../models/user-message';
+import { conversation } from './conversation-items';
 
 @Component({
   selector: 'app-conversation-list',
@@ -9,58 +9,6 @@ import { UserMessage } from '../models/user-message';
 export class ConversationListComponent implements OnInit {
   @ViewChild('myScroll') myScroll!: ElementRef;
   message = '';
-  conversationItems: UserMessage[] = [
-    {
-      date: '23:20',
-      body: 'Hello, Igor',
-      mine: false,
-    },
-    {
-      date: '23:20',
-      body: 'How are you?',
-      mine: false,
-    },
-    {
-      date: '23:20',
-      body: 'Hello, Olya!',
-      mine: true,
-    },
-    {
-      date: '23:20',
-      body: "I'm fine, thx",
-      mine: true,
-    },
-    {
-      date: '23:20',
-      body: 'How are you?',
-      mine: true,
-    },
-    {
-      date: '23:20',
-      body: 'Same',
-      mine: false,
-    },
-    {
-      date: '23:20',
-      body: 'Have you a carrot?',
-      mine: false,
-    },
-    {
-      date: '23:20',
-      body: 'Yes, I have a few',
-      mine: true,
-    },
-    {
-      date: '23:20',
-      body: 'Why do you need it?',
-      mine: true,
-    },
-    {
-      date: '23:20',
-      body: 'Cannot say',
-      mine: false,
-    },
-  ];
 
   constructor() {}
 
@@ -80,15 +28,15 @@ export class ConversationListComponent implements OnInit {
     };
 
     this.message = '';
-    this.conversationItems.push(itemMessage);
+    conversation.items.push(itemMessage);
 
-    localStorage.setItem('myMessages', JSON.stringify(this.conversationItems));
+    localStorage.setItem('myMessages', JSON.stringify(conversation.items));
   }
 
   ngOnInit(): void {
     const itemsString = localStorage.getItem('myMessages');
     if (itemsString) {
-      this.conversationItems = JSON.parse(itemsString);
+      conversation.items = JSON.parse(itemsString);
     }
   }
 }
