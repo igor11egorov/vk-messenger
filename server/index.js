@@ -1,9 +1,12 @@
+const express = require("express");
+const fs = require("fs");
+
 const { CallbackService, VK } = require("vk-io");
 const {
   DirectAuthorization,
   officialAppCredentials,
 } = require("@vk-io/authorization");
-require('dotenv').config();
+require("dotenv").config();
 
 const callbackService = new CallbackService();
 
@@ -15,17 +18,51 @@ const direct = new DirectAuthorization({
   password: process.env.PASSWORD,
 });
 
-async function run() {
-  const response = await direct.run();
+let token = null;
 
-  const vk = new VK({
-    token: response.token,
-  });
-
-  const users = await vk.api.users.get({
-    user_ids: 1,
-  });
-  console.log(users);
+async function vkApi() {
+  if (!token) {
+    const response = await direct.run();
+    token = response.token;
+  }
+  return new VK({
+    token: token,
+  }).api;
 }
 
-run().catch(console.error);
+const app = express();
+const jsonParser = express.json();
+
+app.get("/api/me", async (req, res) => {
+  const api = await vkApi();
+  const users = await api.users.get({ user_ids: [0] });
+  res.send(users.at(0));
+});
+
+app.get("/api/friends", async (req, res) => {
+  const api = await vkApi();
+  const friends = await api.friends.get({ fields: ["photo_100", "about"] });
+  res.send(friends);
+});
+
+app.get("/api/friends/:id", async (req, res) => {
+  const api = await vkApi();
+  const friend = await api.friends.get({
+    fields: ["photo_100", "about"],
+    list_id: [req.params.id],
+  });
+  if (friend) res.send(friend);
+  else res.status(404).send();
+});
+
+// app.post("/api/messages", jsonParser, async (req, res) => {
+//   if (!req.body) return res.sendStatus(400);
+
+//   const userName = req.body.name;
+//   const userAge = req.body.age;
+//   res.send(user);
+// });
+
+app.listen(3000, function () {
+  console.log("Сервер ожидает подключения...");
+});
