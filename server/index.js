@@ -3,6 +3,7 @@ const {
   DirectAuthorization,
   officialAppCredentials,
 } = require("@vk-io/authorization");
+require('dotenv').config();
 
 const callbackService = new CallbackService();
 
@@ -16,12 +17,6 @@ const direct = new DirectAuthorization({
 
 async function run() {
   const response = await direct.run();
-
-  console.log("Token:", response.token);
-  console.log("Expires:", response.expires);
-
-  console.log("Email:", response.email);
-  console.log("User ID:", response.userId);
 
   const vk = new VK({
     token: response.token,
