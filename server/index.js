@@ -35,7 +35,7 @@ const jsonParser = express.json();
 
 app.get("/api/me", async (req, res) => {
   const api = await vkApi();
-  const users = await api.users.get({ user_ids: [0] });
+  const users = await api.users.get({ user_ids: [1], fields: ["photo_100", "about"] });
   res.send(users.at(0));
 });
 
