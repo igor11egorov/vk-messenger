@@ -9,7 +9,7 @@ export class UserItemComponent implements OnInit {
   @Input() name!: string;
   @Input() img!: string;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

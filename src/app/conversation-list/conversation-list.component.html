@@ -1,16 +1,9 @@
 <div class="message-list" #myScroll>
-  <app-conversation-item
-    *ngFor="let item of conversationItems"
-    [data]="item"
-    [ngClass]="{ mine: item.mine }"
-  ></app-conversation-item>
+  <app-conversation-item *ngFor="let item of conversationItems" [data]="item" [ngClass]="{ mine: item.mine }">
+  </app-conversation-item>
 </div>
 <div class="input-footer">
-  <textarea
-    placeholder="введите сообщение"
-    [(ngModel)]="message"
-    (keyup.enter)="sendMessage()"
-  >
+  <textarea placeholder="введите сообщение" [(ngModel)]="message" (keyup.enter)="sendMessage()">
   </textarea>
   <button (click)="sendMessage()">Отправить</button>
 </div>

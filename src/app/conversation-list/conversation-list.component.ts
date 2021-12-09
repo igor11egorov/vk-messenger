@@ -50,5 +50,5 @@ export class ConversationListComponent implements OnInit {
     );
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }

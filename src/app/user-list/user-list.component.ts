@@ -1,5 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
+export interface VkUser {
+  first_name: string
+  id: number
+  last_name: string
+  photo_100: string
+}
 @Component({
   selector: 'app-user-list',
   templateUrl: './user-list.component.html',
@@ -24,7 +31,15 @@ export class UserListComponent implements OnInit {
     },
   ];
 
-  constructor() {}
+  vkUserList: VkUser[] = []
 
-  ngOnInit(): void {}
+  constructor(private http: HttpClient) { }
+
+  ngOnInit(): void {
+    this.http.get<VkUser[]>('http://localhost:3000/api/friends') //заменить на переменную
+      .subscribe(response => {
+        console.log(response)
+        this.vkUserList = response
+      })
+  }
 }

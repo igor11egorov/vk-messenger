@@ -9,7 +9,7 @@ import { UserMessage } from '../models/user-message';
 export class ConversationItemComponent implements OnInit {
   @Input() data!: UserMessage;
 
-  constructor() {}
+  constructor() { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
