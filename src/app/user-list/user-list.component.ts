@@ -2,10 +2,15 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 export interface VkUser {
+  
   first_name: string
   id: number
   last_name: string
+  can_access_closed: boolean
+  is_closed: boolean
   photo_100: string
+  can_invite_to_chats: boolean
+  track_code: string
 }
 @Component({
   selector: 'app-user-list',
@@ -36,9 +41,10 @@ export class UserListComponent implements OnInit {
   constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.http.get<VkUser[]>('http://localhost:3000/api/friends') //заменить на переменную
+    
+    this.http.get<VkUser[]>('/api/friends') //заменить на переменную
       .subscribe(response => {
-        console.log(response)
+        console.log('23232', response)
         this.vkUserList = response
       })
   }
