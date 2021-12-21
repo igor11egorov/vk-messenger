@@ -45,9 +45,9 @@ app.get("/api/friends", async (req, res) => {
   res.send(friends);
 });
 
-app.get("/api/messages", async (req, res) => {
+app.get("/api/messages/:id", async (req, res) => {
   const api = await vkApi();
-  const messages = await api.messages.getHistory({ user_id: 1273060 });
+  const messages = await api.messages.getHistory({ user_id: req.params['id'] });
   res.send(messages);
 });
 

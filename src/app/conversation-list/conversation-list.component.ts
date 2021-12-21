@@ -21,13 +21,13 @@ export class ConversationListComponent implements OnInit {
 
   constructor(activateRoute: ActivatedRoute, private http: HttpClient) {
 
-    this.http.get<VkMessages>('api/messages')
+    
+    activateRoute.params.subscribe((params) => {
+      this.id = params['id'];
+      this.http.get<VkMessages>(`api/messages/${this.id}`)
       .subscribe(response => {
         this.vkMessagesList = response.items
       })
-    activateRoute.params.subscribe((params) => {
-      this.id = params['id'];
-      this.vkMessagesList = this.vkMessagesList;
     });
   }
 
