@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { UserMessage } from '../models/user-message';
+import { VkMessages } from '../models/vk-messages';
+import { VkOneMessage } from '../models/vk-one-message';
 
 @Component({
   selector: 'app-conversation-item',
@@ -7,7 +8,7 @@ import { UserMessage } from '../models/user-message';
   styleUrls: ['./conversation-item.component.scss'],
 })
 export class ConversationItemComponent implements OnInit {
-  @Input() data!: UserMessage;
+  @Input() data!: VkOneMessage;
 
   constructor() { }
 

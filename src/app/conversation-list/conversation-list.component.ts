@@ -2,6 +2,9 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserMessage } from '../models/user-message';
 import { defaultConversation } from './conversation-items';
+import { HttpClient } from '@angular/common/http';
+import { VkOneMessage } from '../models/vk-one-message';
+import { VkMessages } from '../models/vk-messages';
 
 @Component({
   selector: 'app-conversation-list',
@@ -10,21 +13,39 @@ import { defaultConversation } from './conversation-items';
 })
 export class ConversationListComponent implements OnInit {
   @ViewChild('myScroll') myScroll!: ElementRef;
+
+  vkMessagesList: VkOneMessage[] = []
   conversationItems: UserMessage[] = [];
   message = '';
   id?: number;
 
-  constructor(activateRoute: ActivatedRoute) {
+  constructor(activateRoute: ActivatedRoute, private http: HttpClient) {
+
+    this.http.get<VkMessages>('api/messages')
+      .subscribe(response => {
+        this.vkMessagesList = response.items
+      })
     activateRoute.params.subscribe((params) => {
       this.id = params['id'];
-      const itemsString = localStorage.getItem('id' + this.id);
-      if (itemsString) {
-        this.conversationItems = JSON.parse(itemsString);
-      } else {
-        this.conversationItems = [...defaultConversation];
-      }
+      this.vkMessagesList = this.vkMessagesList;
     });
   }
+
+  // conversationItems: UserMessage[] = [];
+  // message = '';
+  // id?: number;
+
+  // constructor(activateRoute: ActivatedRoute) {
+  //   activateRoute.params.subscribe((params) => {
+  //     this.id = params['id'];
+  //     const itemsString = localStorage.getItem('id' + this.id);
+  //     if (itemsString) {
+  //       this.conversationItems = JSON.parse(itemsString);
+  //     } else {
+  //       this.conversationItems = [...defaultConversation];
+  //     }
+  //   });
+  // }
 
   sendMessage() {
     setTimeout(() => {

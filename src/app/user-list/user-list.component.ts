@@ -32,9 +32,7 @@ export class UserListComponent implements OnInit {
 
     this.http.get<VkResponse>('/api/friends')
       .subscribe(response => {
-        console.log('204', response)
         this.vkUserList = response.items
-        console.log('5', this.vkUserList[5])
       })
   }
 }
