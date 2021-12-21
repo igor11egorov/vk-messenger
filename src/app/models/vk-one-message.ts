@@ -1,5 +1,5 @@
 export interface VkOneMessage {
-    date: number
+    date: number 
     from_id: number
     id: number
     out: number

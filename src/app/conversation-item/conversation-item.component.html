@@ -1,4 +1,4 @@
 <div>
-  <time class="date">{{ data.date }}</time>
+  <time class="date">{{ data.date*1000 | date: 'dd.MM.yyyy HH:mm' }}</time>
   <span class="body">{{ data.text }}</span>
 </div>
