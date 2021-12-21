@@ -1,5 +1,5 @@
 <div class="message-list" #myScroll>
-  <app-conversation-item *ngFor="let item of vkMessagesList" [data]="item" [ngClass]="{ mine: item.from_id }">
+  <app-conversation-item *ngFor="let item of vkMessagesList" [data]="item" [ngClass]="{ mine: item.from_id == 93545149}">
   </app-conversation-item>
 </div>
 <div class="input-footer">
